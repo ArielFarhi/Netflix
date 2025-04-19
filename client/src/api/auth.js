@@ -1,4 +1,3 @@
-//need to change
 import axiosInstance from "./axiosInstance";
 
 export const loginUser = async (credentials) => {
