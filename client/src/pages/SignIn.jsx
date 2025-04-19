@@ -26,7 +26,7 @@ function SignIn() {
   return (
     <div
       className="overflow-x-hidden max-w-screen min-h-screen flex flex-col justify-center items-center bg-[rgb(20,20,20)] bg-cover bg-center relative"
-      style={{ backgroundImage: "url('/SignupBackground.png')" }}
+      style={{ backgroundImage: "url('/Background.png')" }}
     >
       <div className="absolute inset-0 bg-black opacity-50" />
       <img
