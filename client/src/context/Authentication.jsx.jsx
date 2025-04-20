@@ -11,6 +11,7 @@ const AuthContext = createContext();
 export const UserAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true); 
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -22,17 +23,21 @@ export const UserAuthProvider = ({ children }) => {
     }
     setIsLoading(false); 
   }, []);
+
   const signInUser = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData)); 
   };
+
   const signOutUser = () => {
     setUser(null);
     localStorage.removeItem("user"); 
   };
+
   if (isLoading) {
     return <LoadingScreen />; 
   }
+
   return (
     <AuthContext.Provider value={{ user, signInUser, signOutUser, setUser }}>
       {children}
@@ -64,7 +69,7 @@ export const useLogin = () => {
         });
 
         const isAdmin = user.role === "Admin";
-        navigate(isAdmin ? "/admin-dashboard" : "/who-is-watching");
+        navigate(isAdmin ? "/admin-dashboard" : "/profile-selection");
       } else {
         toast.error("Login failed. No user data received.");
       }
