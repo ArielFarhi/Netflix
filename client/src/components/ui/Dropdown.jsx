@@ -1,7 +1,10 @@
 import * as React from "react";
 import * as Menu from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...inputs) => twMerge(clsx(inputs));
 
 export const MenuRoot = Menu.Root;
 export const MenuTrigger = Menu.Trigger;
