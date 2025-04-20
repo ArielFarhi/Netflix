@@ -12,7 +12,7 @@ import MaximizeIcon from "@mui/icons-material/OpenInFull";
 import MinimizeIcon from "@mui/icons-material/CloseFullscreen";
 import { useProgramDetail } from "../api/programData";
 import { useAddMovie } from "../api/myList";
-import { useUserAuth } from "../context/Authentication";
+import { useUserAuth } from "../context/Authentication.jsx";
 import LoadingScreen from "../components/ui/LoadingScreen";
 
 const MovieDialog = ({ movie: id, isOpen, onClose }) => {
