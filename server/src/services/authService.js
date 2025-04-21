@@ -12,39 +12,53 @@ function validatePasswordFormat(password) {
   return pattern.test(password);
 }
 
-async function registerUser({ username, password }) {
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    const err = new Error("Email or phone already exists");
+async function registerUser({ email, phone, password, role }) {
+  const existingEmail = await User.findOne({ email });
+  if (existingEmail) {
+    const err = new Error("Email already in use");
     err.statusCode = 409;
     throw err;
   }
+
+  const existingPhone = await User.findOne({ phone });
+  if (existingPhone) {
+    const err = new Error("Phone number already in use");
+    err.statusCode = 409;
+    throw err;
+  }
+
   if (!validatePasswordFormat(password)) {
     const err = new Error(
-      "Please choose a password with a minimum of 8 characters, containing both letters and digits"
+      "Password must be at least 8 characters and include at least one letter and one number"
     );
     err.statusCode = 422;
     throw err;
   }
-  const newUser = await User.create({ username, password });
+
+  const newUser = await User.create({
+    email,
+    phone,
+    password,
+    role: role || "User"
+  });
+
   const token = generateJwtToken(newUser._id);
   return { user: newUser, token };
 }
 
-async function loginUser(credentials) {
-  const { username, password } = credentials;
-  const userRecord = await User.findOne({ username });
-  const isMatch = userRecord && await userRecord.matchPassword(password);
-  if (!isMatch) {
-    const err = new Error("Invalid credentials");
+async function loginUser({ email, password }) {
+  const user = await User.findOne({ email });
+  if (!user || !(await user.matchPassword(password))) {
+    const err = new Error("Invalid email or password");
     err.statusCode = 401;
     throw err;
   }
-  const token = generateJwtToken(userRecord._id);
-  return { user: userRecord, token };
+
+  const token = generateJwtToken(user._id);
+  return { user, token };
 }
 
 export default {
   registerUser,
-  loginUser,
+  loginUser
 };
