@@ -1,4 +1,3 @@
-// ✅ routes/reviewRoutes.js
 import express from "express";
 import protect from "../middlewares/authMiddleware.js";
 import {
@@ -11,7 +10,7 @@ const router = express.Router();
 
 router.use(protect);
 router.post("/", addReview);
-router.get("/", getAllReviews); // 🔥 חדש
+router.get("/", getAllReviews); 
 router.get("/:id", getReviewsByProgram);
 
 export default router;
