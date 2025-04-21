@@ -1,10 +1,40 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
 const userSchema = new mongoose.Schema({
-  username: { type: String, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ["Admin", "User"], default: "User" },
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+    unique: true,
+    lowercase: true,
+    match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"]
+  },
+  phone: {
+    type: String,
+    required: [true, "Phone number is required"],
+    unique: true,
+    match: [/^\d{9,15}$/, "Please enter a valid phone number"]
+  },
+  password: {
+    type: String,
+    required: [true, "Password is required"],
+    validate: {
+      validator: function (v) {
+        return passwordRegex.test(v);
+      },
+      message:
+        "Password must be at least 8 characters long and include at least one letter and one number"
+    }
+  },
+  role: {
+    type: String,
+    enum: ["Admin", "User"],
+    default: "User"
+  }
+}, {
+  timestamps: true
 });
 
 userSchema.pre("save", async function () {
@@ -16,5 +46,4 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-const User = mongoose.model("User", userSchema);
-export default User;
+export default mongoose.model("User", userSchema);
