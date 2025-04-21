@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/programs", programRoutes);
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/mylist", movieListRoutes); 
+app.use('/api/movie-list', movieListRoutes);
 
 app.use((req, res) => {
   res.status(404).send("Page not found");

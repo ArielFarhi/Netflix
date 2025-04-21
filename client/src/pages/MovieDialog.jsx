@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MaximizeIcon from "@mui/icons-material/OpenInFull";
 import MinimizeIcon from "@mui/icons-material/CloseFullscreen";
 import { useProgramDetail } from "../api/programData";
-import { useAddMovie } from "../api/myList";
+import { useAddMovieList } from "../api/movieList"; // ✅ תיקון הייבוא
 import { useUserAuth } from "../context/Authentication.jsx";
 import LoadingScreen from "../components/ui/LoadingScreen";
 
@@ -23,7 +23,7 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
   const [isFullScreen, setIsFullScreen] = React.useState(false);
 
   const { data, isLoading } = useProgramDetail(id);
-  const { mutate: addToList, isLoading: isAdding } = useAddMovie();
+  const { mutate: addToList, isLoading: isAdding } = useAddMovieList(); // ✅ שימוש נכון
 
   const handleClose = () => {
     onClose?.();
@@ -34,7 +34,11 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
   const toggleFullScreen = () => setIsFullScreen((prev) => !prev);
 
   const handleAddToList = () => {
-    if (!data) return;
+    if (!data?.id || !user?._id || !data?.title || !data?.poster_path) {
+      console.warn("Missing required fields for movie");
+      return;
+    }
+
     addToList({
       movieId: data.id,
       userId: user._id,

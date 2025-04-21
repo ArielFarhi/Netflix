@@ -1,6 +1,6 @@
 //need to change
 import { Navigate, useLocation } from "react-router";
-import { useUserAuth } from "../context/Authentication.jsx.jsx";
+import { useUserAuth } from "../context/Authentication.jsx";
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user } = useUserAuth();

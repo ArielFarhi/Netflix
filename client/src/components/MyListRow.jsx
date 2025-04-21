@@ -1,14 +1,16 @@
 import React from "react";
-import { useMyMovieList } from "../api/myList"; // או "../hooks/useList"
+import { useMovieList } from "../api/movieList";
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; // או Spinner
+import LoadingScreen from "./ui/LoadingScreen";
 
 const MyListRow = ({ setSelectedMovie, userId }) => {
   const {
     data: myList = [],
     isLoading,
     error,
-  } = useMyMovieList(userId);
+  } = useMovieList(userId); // ✅ תמיד נקרה, הוא כבר מוגבל ע"י enabled
+
+  if (!userId) return null; // 🟢 אפשר להשאיר – רק אחרי ההוק
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading your list.</div>;

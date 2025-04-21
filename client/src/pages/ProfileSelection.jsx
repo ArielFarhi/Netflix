@@ -105,7 +105,7 @@ const ProfileCard = ({ username, avatar }) => {
     >
       <CardContent className="flex flex-col items-center justify-center p-4">
         <img
-          src={`${process.env.REACT_APP_PUBLIC_URL}profile-avators/${
+          src={`${process.env.REACT_APP_PUBLIC_URL}/${
             avatar || "default.png"
           }`}
           alt="Profile"

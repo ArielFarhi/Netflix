@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useSearchContext } from "../context/Search.jsx";
-import { MenuRoot, MenuTrigger, MenuContent, MenuItem } from "../components/ui/Dropdown";
+import {
+  MenuRoot,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+} from "../components/ui/Dropdown";
 import { LogOut, User } from "lucide-react";
-import { useUserAuth } from "../context/Authentication.jsx.jsx";
+import { useUserAuth } from "../context/Authentication.jsx";
 
 const Navbar = () => {
-  const { user, logout } = useUserAuth();
+  const navigate = useNavigate();
+  const { user, signOutUser } = useUserAuth();
   const [searchInput, setSearchInput] = useState("");
   const { updateSearchQuery } = useSearchContext();
   const selectedProfile = JSON.parse(localStorage.getItem("selectedProfile"));
@@ -23,6 +29,11 @@ const Navbar = () => {
     if (e.key === "Enter") handleSearch();
   };
 
+  const handleLogout = () => {
+    signOutUser();
+    navigate("/signin"); // העברה לעמוד התחברות
+  };
+
   return (
     <nav className="mt-6 bg-transparent text-white w-screen flex items-center justify-between px-4">
       <div className="lg:hidden flex items-center">
@@ -35,15 +46,17 @@ const Navbar = () => {
           <Link to="/">
             <img src="/Logo.png" alt="Logo" className="h-8" />
           </Link>
-          {["Home", "TV Shows", "Movies", "New & Popular", "My List", "Browse"].map((label, index) => (
-            <Link
-              key={index}
-              to={`/${label.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
-              className="text-white hover:text-gray-300"
-            >
-              {label}
-            </Link>
-          ))}
+          {["Home", "TV Shows", "Movies", "New & Popular", "My List", "Browse"].map(
+            (label, index) => (
+              <Link
+                key={index}
+                to={`/${label.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
+                className="text-white hover:text-gray-300"
+              >
+                {label}
+              </Link>
+            )
+          )}
         </div>
         <div className="flex items-center gap-6">
           <div className="relative border border-gray-600 rounded-md w-60 h-10 flex items-center px-3 hover:border-gray-500 transition-colors duration-200">
@@ -64,7 +77,7 @@ const Navbar = () => {
           <MenuRoot>
             <MenuTrigger className="flex items-center gap-2 focus:outline-none">
               <img
-                src={`${process.env.REACT_APP_PUBLIC_URL}profile-avators/${selectedProfile?.avatar || "default.png"}`}
+                src={`${process.env.REACT_APP_PUBLIC_URL}images/${selectedProfile?.avatar || "default.png"}`}
                 alt="Profile"
                 className="h-8 w-8 rounded-full object-cover"
               />
@@ -76,7 +89,7 @@ const Navbar = () => {
                 <span>{selectedProfile?.username}</span>
               </MenuItem>
               <MenuItem
-                onClick={logout}
+                onClick={handleLogout}
                 className="flex items-center gap-2 cursor-pointer"
               >
                 <LogOut size={16} />
