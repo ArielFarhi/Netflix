@@ -98,3 +98,20 @@ export const useAddProgram = () =>
         description: err?.response?.data?.message || "Something went wrong!",
       }),
   });
+
+  // Get user saved list (e.g., "My List")
+export const getSavedPrograms = async () => {
+  const { data } = await axiosInstance.get("/my-list"); // הנתיב תלוי ב-backend שלך
+  return data;
+};
+
+export const useSavedPrograms = () =>
+  useQuery({
+    queryKey: ["saved-programs"],
+    queryFn: getSavedPrograms,
+    onError: (err) =>
+      toast.error("Failed to load your saved list", {
+        description: err?.response?.data?.message || "Something went wrong!",
+      }),
+    refetchOnWindowFocus: false,
+  });
