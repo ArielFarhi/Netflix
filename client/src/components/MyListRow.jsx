@@ -8,9 +8,9 @@ const MyListRow = ({ setSelectedMovie, userId }) => {
     data: myList = [],
     isLoading,
     error,
-  } = useMovieList(userId); // ✅ תמיד נקרה, הוא כבר מוגבל ע"י enabled
+  } = useMovieList(userId);
 
-  if (!userId) return null; // 🟢 אפשר להשאיר – רק אחרי ההוק
+  if (!userId) return null;
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading your list.</div>;

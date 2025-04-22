@@ -1,7 +1,7 @@
 import React from "react";
 import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; 
+import LoadingScreen from "./ui/LoadingScreen";
 
 const MatchedForYouRow = ({ setSelectedMovie, type }) => {
   const {
