@@ -1,7 +1,7 @@
 import React from "react";
-import { useGetAnimatedPrograms } from "../api/programData"; // או "../hooks/usePrograms"
+import { useGetAnimatedPrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; // או Spinner
+import LoadingScreen from "./ui/LoadingScreen";
 
 const AnimatedRow = ({ setSelectedMovie, type }) => {
   const {
