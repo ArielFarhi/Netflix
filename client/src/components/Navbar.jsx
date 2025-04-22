@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     signOutUser();
-    navigate("/signin"); // העברה לעמוד התחברות
+    navigate("/signin");
   };
 
   return (
@@ -41,23 +41,32 @@ const Navbar = () => {
           <img src="/Logo.png" alt="Logo" className="h-8" />
         </Link>
       </div>
+
       <div className="hidden lg:flex flex-row justify-between w-screen items-center">
         <div className="flex flex-row justify-around items-center w-1/2 gap-6">
           <Link to="/">
             <img src="/Logo.png" alt="Logo" className="h-8" />
           </Link>
-          {["Home", "TV Shows", "Movies", "New & Popular", "My List", "Browse"].map(
-            (label, index) => (
-              <Link
-                key={index}
-                to={`/${label.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
-                className="text-white hover:text-gray-300"
-              >
-                {label}
-              </Link>
-            )
-          )}
+
+          {/* ✅ ניווט עם נתיבים מדויקים */}
+          {[
+            { label: "Home", path: "/" },
+            { label: "TV Shows", path: "/tv-shows" },
+            { label: "Movies", path: "/movies" },
+            { label: "New & Popular", path: "/new-and-popular" },
+            { label: "My List", path: "/my-list" },
+            { label: "Browse", path: "/browse" },
+          ].map(({ label, path }, index) => (
+            <Link
+              key={index}
+              to={path}
+              className="text-white hover:text-gray-300"
+            >
+              {label}
+            </Link>
+          ))}
         </div>
+
         <div className="flex items-center gap-6">
           <div className="relative border border-gray-600 rounded-md w-60 h-10 flex items-center px-3 hover:border-gray-500 transition-colors duration-200">
             <input
@@ -73,16 +82,21 @@ const Navbar = () => {
               onClick={handleSearch}
             ></i>
           </div>
+
           <i className="fa-regular fa-bell text-xl text-white cursor-pointer"></i>
+
           <MenuRoot>
             <MenuTrigger className="flex items-center gap-2 focus:outline-none">
               <img
-                src={`${process.env.REACT_APP_PUBLIC_URL}images/${selectedProfile?.avatar || "default.png"}`}
+                src={`${
+                  process.env.REACT_APP_PUBLIC_URL
+                }images/${selectedProfile?.avatar || "default.png"}`}
                 alt="Profile"
                 className="h-8 w-8 rounded-full object-cover"
               />
               <i className="fa-solid fa-angle-down text-white"></i>
             </MenuTrigger>
+
             <MenuContent className="bg-white text-black w-44 mt-2 rounded-md shadow-lg p-1">
               <MenuItem className="flex items-center gap-2 cursor-pointer">
                 <User size={16} />
