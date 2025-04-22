@@ -16,7 +16,7 @@ const SignUp = () => {
       email: "",
       phone: "",
       password: "",
-      role: "User",
+      role: "user",
     },
   });
 
@@ -106,14 +106,13 @@ const SignUp = () => {
           </span>
         )}
 
-        {/* Role Selection */}
         <label className="text-sm">Select Role:</label>
         <select
           {...register("role", { required: true })}
           className="w-full h-12 p-3 border border-gray-600 rounded bg-transparent text-white"
         >
-          <option value="User">User</option>
-          <option value="Admin">admin</option>
+          <option value="user">user</option>
+          <option value="admin">admin</option>
         </select>
 
         <button

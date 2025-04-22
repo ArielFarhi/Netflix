@@ -1,7 +1,7 @@
 //need to change
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.js";
+import App from "./App.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { SearchProvider } from "./context/Search";

@@ -39,7 +39,7 @@ async function registerUser({ email, phone, password, role }) {
     email,
     phone,
     password,
-    role: role || "User"
+    role: role || "user"
   });
 
   const token = generateJwtToken(newUser._id);

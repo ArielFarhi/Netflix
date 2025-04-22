@@ -40,7 +40,6 @@ const SignIn = () => {
       >
         <h2 className="text-2xl font-medium">Sign In</h2>
 
-        {/* Email */}
         <input
           type="email"
           placeholder="Email"
@@ -51,7 +50,6 @@ const SignIn = () => {
           <span className="text-red-500 text-sm">{errors.email.message}</span>
         )}
 
-        {/* Password */}
         <input
           type="password"
           placeholder="Password"
@@ -68,7 +66,6 @@ const SignIn = () => {
           <span className="text-red-500 text-sm">{errors.password.message}</span>
         )}
 
-        {/* Remember Me */}
         <label className="flex items-center gap-2 text-sm">
           <input
             type="checkbox"

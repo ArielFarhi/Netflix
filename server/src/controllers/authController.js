@@ -4,10 +4,9 @@ const buildCookieOptions = (rememberMe) => ({
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: "strict",
-  ...(rememberMe && { maxAge: 60 * 60 * 1000 }) // שעה אחת
+  ...(rememberMe && { maxAge: 60 * 60 * 1000 }) 
 });
 
-// REGISTER - משתמש ב-email, phone, password, role
 const register = async (req, res, next) => {
   try {
     const { email, phone, password, role } = req.body;
@@ -18,7 +17,6 @@ const register = async (req, res, next) => {
   }
 };
 
-// LOGIN - לפי email בלבד
 const login = async (req, res, next) => {
   try {
     const { email, password, rememberMe } = req.body;
@@ -35,7 +33,6 @@ const login = async (req, res, next) => {
   }
 };
 
-// GET ME - מחזיר את המשתמש מה-token
 const getMe = (req, res) => {
   res.status(200).json({
     message: "User authenticated",

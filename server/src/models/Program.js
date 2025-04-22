@@ -1,32 +1,23 @@
-// import mongoose from "mongoose";
-
-// const programSchema = new mongoose.Schema({
-//   title: { type: String, required: true },
-//   genre: { type: String, required: true },
-//   description: { type: String },
-//   rating: { type: Number, default: 0 },
-//   releaseDate: { type: Date },
-//   type: { type: String, enum: ["movie", "tv-show"] },
-//   episodes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Episode" }],
-// });
-
-// export default mongoose.model("Program", programSchema);
-
 import mongoose from "mongoose";
 
 const programSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  genre: { type: String, required: true },
-  description: { type: String },
-  rating: { type: Number, default: 0 },
-  releaseDate: { type: Date },
   type: { type: String, enum: ["movie", "tv-show"] },
-  episodes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Episode" }],
+  description: { type: String }, 
+  releaseDate: { type: Date },
+  genre: { type: String }, 
+  rating: { type: Number, default: 0 },
+  popularity: { type: Number }, 
+  originalLanguage: { type: String },
+  tmdbId: { type: String }, 
+  tags: [{ type: String }], 
+  cast: [{ type: String }], 
+  backdropUrl: { type: String }, 
+  posterUrl: { type: String },  
 
-  // ✅ תוספות חדשות:
-  originalLanguage: { type: String }, // שפת מקור
-  subtitleLanguages: [{ type: String }], // כתוביות
-  dubbingLanguages: [{ type: String }], // דיבוב
+  subtitleLanguages: [{ type: String }],
+  dubbingLanguages: [{ type: String }],
+  episodes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Episode" }],
 });
 
 export default mongoose.model("Program", programSchema);

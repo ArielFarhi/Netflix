@@ -1,3 +1,4 @@
+import Program from "../models/Program.js";
 import axios from "axios";
 import dotenv from "dotenv";
 
@@ -51,7 +52,8 @@ const listPrograms = async ({ type }) => {
 };
 
 const addProgram = async (programData) => {
-  return programData;
+  const created = await Program.create(programData);
+  return created;
 };
 
 const getProgramDetail = async (id, type = "movie") => {
@@ -94,6 +96,7 @@ const getAnimatedPrograms = async (type = "movie") => {
 
   return results.filter((item) => item.genre_ids?.includes(16));
 };
+
 
 export default {
   listPrograms,

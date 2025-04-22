@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-
 import LoadingScreen from "../components/ui/LoadingScreen";
 import { loginUser, registerUser, getCurrentUser } from "../api/auth";
 
@@ -68,7 +67,7 @@ export const useLogin = () => {
           description: `Welcome back, ${user.username}!`,
         });
 
-        const isAdmin = user.role === "Admin";
+        const isAdmin = user.role === "admin";
         navigate(isAdmin ? "/admin-dashboard" : "/profile-selection");
       } else {
         toast.error("Login failed. No user data received.");

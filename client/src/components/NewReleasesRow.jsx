@@ -1,7 +1,7 @@
 import React from "react";
-import { usePrograms } from "../api/programData"; // או ../hooks/usePrograms לפי המיקום
+import { usePrograms } from "../api/programData"; 
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; // או Spinner, לפי מה שאת משתמשת
+import LoadingScreen from "./ui/LoadingScreen"; 
 
 const NewReleasesRow = ({ setSelectedMovie, type }) => {
   const { data: newReleases, isLoading, error } = usePrograms({
