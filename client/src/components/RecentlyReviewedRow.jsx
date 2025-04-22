@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; 
+import LoadingScreen from "./ui/LoadingScreen";
 import { useGetReviews } from "../api/reviewData";
 
 const RecentlyReviewedRow = ({ setSelectedMovie }) => {

@@ -1,7 +1,7 @@
 import React from "react";
-import { usePrograms } from "../api/programData"; // או ../hooks/usePrograms
+import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
-import LoadingScreen from "./ui/LoadingScreen"; // או Spinner אם את משתמשת בזה
+import LoadingScreen from "./ui/LoadingScreen";
 
 const TrendingRow = ({ setSelectedMovie, type }) => {
   const {
