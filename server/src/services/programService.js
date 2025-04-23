@@ -15,6 +15,7 @@ class AppError extends Error {
 
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+
 const tmdbRequest = async (endpoint, params = {}) => {
   try {
     const response = await axios.get(`${TMDB_BASE_URL}${endpoint}`, {
@@ -68,18 +69,56 @@ const getProgramDetail = async (id, type = "movie") => {
   }
 };
 
-const searchPrograms = async ({ type = "movie", query, category, language = "en-US" }) => {
+const searchPrograms = async ({
+  type = "movie",
+  query,
+  category,
+  language = "English",
+  sortBy,
+  ageRating,
+}) => {
   const endpoint = query?.trim()
     ? `/search/${type}`
     : `/discover/${type}`;
 
   const params = {
-    language,
+    language: getLanguageCode(language),
+    with_original_language: getLanguageShortCode(language),
     ...(query?.trim() && { query }),
     ...(category && { with_genres: category }),
+    ...(sortBy && {
+      sort_by:
+        sortBy === "A-Z"
+          ? "original_title.asc"
+          : sortBy === "Z-A"
+            ? "original_title.desc"
+            : "popularity.desc",
+    }),
+    ...(ageRating && ageRating !== "All" && {
+      certification_country: "US",
+      certification_lte: ageRating,
+    }),
   };
 
   return await tmdbRequest(endpoint, params);
+};
+
+const getLanguageCode = (name) => {
+  const map = {
+    English: "en-US",
+    Spanish: "es-ES",
+    French: "fr-FR",
+  };
+  return map[name] || "en-US";
+};
+
+const getLanguageShortCode = (name) => {
+  const map = {
+    English: "en",
+    Spanish: "es",
+    French: "fr",
+  };
+  return map[name] || "en";
 };
 
 const getTopRatedPrograms = async (type = "movie") => {
@@ -97,7 +136,6 @@ const getAnimatedPrograms = async (type = "movie") => {
   return results.filter((item) => item.genre_ids?.includes(16));
 };
 
-
 export default {
   listPrograms,
   addProgram,
@@ -106,5 +144,3 @@ export default {
   getTopRatedPrograms,
   getAnimatedPrograms,
 };
-
-

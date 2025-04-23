@@ -41,6 +41,8 @@ export const searchPrograms = async (req, res, next) => {
       category: req.query.category,
       language: req.query.language,
       query: req.query.query,
+      sortBy: req.query.sortBy,
+      ageRating: req.query.ageRating, 
     };
     const results = await programService.searchPrograms(searchParams);
     res.json(results);

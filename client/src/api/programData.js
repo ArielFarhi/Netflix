@@ -99,9 +99,8 @@ export const useAddProgram = () =>
       }),
   });
 
-  // Get user saved list (e.g., "My List")
 export const getSavedPrograms = async () => {
-  const { data } = await axiosInstance.get("/my-list"); // הנתיב תלוי ב-backend שלך
+  const { data } = await axiosInstance.get("/my-list"); 
   return data;
 };
 

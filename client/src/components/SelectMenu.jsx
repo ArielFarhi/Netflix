@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function SelectMenu({ options, selected, onChange, label }) {
+function SelectMenu({ options, selectedOption, onSelect }) {
   const [open, setOpen] = useState(false);
 
   const handleSelect = (option) => {
-    onChange(option);
+    onSelect(option);
     setOpen(false);
   };
 
@@ -15,7 +15,7 @@ function SelectMenu({ options, selected, onChange, label }) {
         onClick={() => setOpen((prev) => !prev)}
         className="w-full h-8 px-4 flex justify-between items-center text-xs text-white bg-transparent border border-gray-600 rounded-md"
       >
-        {selected} <span className="ml-2">▼</span>
+        {selectedOption} <span className="ml-2">▼</span>
       </button>
 
       {open && (

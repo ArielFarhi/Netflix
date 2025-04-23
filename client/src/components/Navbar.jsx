@@ -47,8 +47,6 @@ const Navbar = () => {
           <Link to="/">
             <img src="/Logo.png" alt="Logo" className="h-8" />
           </Link>
-
-          {/* ✅ ניווט עם נתיבים מדויקים */}
           {[
             { label: "Home", path: "/" },
             { label: "TV Shows", path: "/tv-shows" },
@@ -82,21 +80,16 @@ const Navbar = () => {
               onClick={handleSearch}
             ></i>
           </div>
-
           <i className="fa-regular fa-bell text-xl text-white cursor-pointer"></i>
-
           <MenuRoot>
             <MenuTrigger className="flex items-center gap-2 focus:outline-none">
               <img
-                src={`${
-                  process.env.REACT_APP_PUBLIC_URL
-                }images/${selectedProfile?.avatar || "default.png"}`}
+                src={`http://localhost:8080/images/${selectedProfile?.avatar || "default.png"}`}
                 alt="Profile"
                 className="h-8 w-8 rounded-full object-cover"
               />
               <i className="fa-solid fa-angle-down text-white"></i>
             </MenuTrigger>
-
             <MenuContent className="bg-white text-black w-44 mt-2 rounded-md shadow-lg p-1">
               <MenuItem className="flex items-center gap-2 cursor-pointer">
                 <User size={16} />

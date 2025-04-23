@@ -1,21 +1,21 @@
 import Profile from "../models/Profile.js";
 
 const AVATARS = Object.freeze([
-  "angryman.png",
-  "blue.png",
-  "chicken.png",
-  "dark blue.png",
-  "fluffyblue.png",
-  "fluffygrey.png",
-  "fluffyyellow.png",
-  "green.png",
-  "kids.png",
-  "panda.png",
-  "pink.png",
-  "purple.png",
-  "red.png",
-  "yellow.png",
-  "zombi.png",
+  "avatar1.png",
+  "avatar2.png",
+  "avatar3.png",
+  "avatar4.png",
+  "avatar5.png",
+  "avatar6.png",
+  "avatar7.png",
+  "avatar8.png",
+  "avatar9.png",
+  "avatar10.png",
+  "avatar11.png",
+  "avatar12.png",
+  "avatar13.png",
+  "avatar14.png",
+  "avatar15.png",
 ]);
 
 function selectRandomAvatar() {

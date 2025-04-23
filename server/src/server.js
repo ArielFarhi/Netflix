@@ -5,6 +5,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import express from "express";
 import logger from "morgan";
+import path from "path";
+import { fileURLToPath } from "url"; 
+
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import programRoutes from "./routes/programRoutes.js";
@@ -13,6 +16,11 @@ import movieListRoutes from "./routes/movieListRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use("/", express.static(path.join(__dirname, "../public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
