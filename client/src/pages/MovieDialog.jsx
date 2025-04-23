@@ -52,13 +52,27 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
   const {
     backdrop_path = "",
     genres = [],
-    original_title = "Untitled",
+    title = "Untitled",
     overview = "No description available.",
     original_language = "N/A",
     origin_country = [],
     production_companies = [],
     belongs_to_collection = null,
-  } = data || {};
+    poster_path = "",
+    country = "Unknown",
+  } = data;
+
+  const genreList = Array.isArray(genres)
+    ? genres.map((g) => (typeof g === "string" ? g : g.name)).filter(Boolean)
+    : [];
+
+  const countryList =
+    origin_country.length > 0 ? origin_country.join(", ") : "Unknown";
+
+  const companyList =
+    production_companies.length > 0
+      ? production_companies.map((c) => (typeof c === "string" ? c : c.name)).join(", ")
+      : "N/A";
 
   return (
     <Dialog
@@ -110,6 +124,7 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
             </IconButton>
           </Box>
         </DialogTitle>
+
         <DialogContent
           dividers
           sx={{
@@ -117,25 +132,39 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
             overflowY: "auto",
             color: "white",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            flexDirection: "row",
+            gap: 24,
             justifyContent: "center",
+            alignItems: "flex-start",
             backgroundColor: "transparent",
+            paddingTop: "5rem",
           }}
         >
-          <Box sx={{ width: "100%", textAlign: "center", mt: 16 }}>
-            <div className="flex gap-1 items-center justify-center mb-2 relative z-10">
+          {/* תמונת פוסטר קטנה */}
+          <Box sx={{ minWidth: 160 }}>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+              alt={title}
+              className="rounded-lg shadow-md max-w-[160px] object-cover"
+            />
+          </Box>
+
+          {/* תוכן הסרט */}
+          <Box sx={{ maxWidth: "600px", textAlign: "left" }}>
+            <div className="flex gap-1 items-center justify-start mb-2 relative z-10">
               <img src="./NetflixLogoLetter.png" alt="Logo" className="w-3 h-6" />
               <span className="font-light text-gray-300">
-                {genres.map((g) => g.name).join(", ")}
+                {genreList.join(", ") || "No genres available"}
               </span>
             </div>
-            <h1 className="font-extrabold text-3xl uppercase">{original_title}</h1>
-            <div className="flex gap-2 justify-center mt-4">
+
+            <h1 className="font-extrabold text-3xl uppercase mb-4">{title}</h1>
+
+            <div className="flex gap-2 mb-6">
               <button
                 className="w-24 h-8 bg-white rounded-sm text-black flex items-center justify-center gap-2"
                 onClick={() =>
-                  navigate(`/review/${id}?posterPath=${data?.poster_path}`)
+                  navigate(`/review/${id}?posterPath=${poster_path}&title=${encodeURIComponent(title)}`)
                 }
               >
                 <i className="fa-solid fa-play"></i> Review
@@ -148,19 +177,19 @@ const MovieDialog = ({ movie: id, isOpen, onClose }) => {
                 <i className="fa-solid fa-plus"></i>
               </button>
             </div>
-            <div className="flex flex-col md:flex-row justify-between px-4 mt-8 text-left text-sm text-gray-200">
-              <div className="flex-1 space-y-2">
-                <p><strong className="text-[#46D369]">New</strong> • {genres.length} Categories</p>
-                <p>Language: {original_language.toUpperCase()}</p>
-                <p>Country: {origin_country.join(", ") || "Unknown"}</p>
-                <p>Genres: {genres.map((g) => g.name).join(", ")}</p>
-                <p>Cast: {production_companies.map((c) => c.name).join(", ")}</p>
-                <p>Collection: {belongs_to_collection?.name || "Not part of a collection"}</p>
-              </div>
-              <div className="flex-1 mt-4 md:mt-0">
-                <h3 className="font-medium text-lg mb-1">Overview</h3>
-                <p className="leading-tight">{overview}</p>
-              </div>
+
+            <div className="text-sm text-gray-200 space-y-1">
+              <p><strong className="text-[#46D369]">New</strong> • {genreList.length} Categories</p>
+              <p>Language: {original_language.toUpperCase()}</p>
+              <p>Country: {country}</p>
+              <p>Genres: {genreList.join(", ")}</p>
+              <p>Cast: {companyList}</p>
+              <p>Collection: {belongs_to_collection?.name || "Not part of a collection"}</p>
+            </div>
+
+            <div className="mt-6">
+              <h3 className="font-medium text-lg mb-1">Overview</h3>
+              <p className="leading-tight text-gray-300">{overview}</p>
             </div>
           </Box>
         </DialogContent>

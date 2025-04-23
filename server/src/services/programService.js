@@ -61,6 +61,12 @@ const getProgramDetail = async (id, type = "movie") => {
   try {
     const endpoint = type === "tv" ? `/tv/${id}` : `/movie/${id}`;
     const program = await tmdbRequest(endpoint);
+
+    const country =
+      type === "tv"
+        ? program.origin_country?.[0] || "Unknown"
+        : program.production_countries?.[0]?.name || "Unknown";
+
     return {
       id: program.id,
       title: program.title || program.name,
@@ -68,7 +74,8 @@ const getProgramDetail = async (id, type = "movie") => {
       poster_path: program.poster_path,
       release_date: program.release_date || program.first_air_date,
       vote_average: program.vote_average,
-      genres: program.genres?.map((g) => g.name) || [], 
+      genres: program.genres?.map((g) => g.name) || [],
+      country, 
     };
   } catch (error) {
     if (error.response?.status === 404) {
