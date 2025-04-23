@@ -60,7 +60,16 @@ const addProgram = async (programData) => {
 const getProgramDetail = async (id, type = "movie") => {
   try {
     const endpoint = type === "tv" ? `/tv/${id}` : `/movie/${id}`;
-    return await tmdbRequest(endpoint);
+    const program = await tmdbRequest(endpoint);
+    return {
+      id: program.id,
+      title: program.title || program.name,
+      overview: program.overview,
+      poster_path: program.poster_path,
+      release_date: program.release_date || program.first_air_date,
+      vote_average: program.vote_average,
+      genres: program.genres?.map((g) => g.name) || [], 
+    };
   } catch (error) {
     if (error.response?.status === 404) {
       throw new AppError(`No ${type} found with ID ${id}`, 404);

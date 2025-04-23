@@ -2,9 +2,21 @@ import axiosInstance from "./axiosInstance";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+// export const getPrograms = async (params = {}) => {
+//   const { data } = await axiosInstance.get("/programs", { params });
+//   return data;
+// };
+
 export const getPrograms = async (params = {}) => {
   const { data } = await axiosInstance.get("/programs", { params });
-  return data;
+
+  // הוספת genres מדומה
+  const withGenres = data.map((program, i) => ({
+    ...program,
+    genres: i % 2 === 0 ? ["Action", "Drama"] : ["Comedy"],
+  }));
+
+  return withGenres;
 };
 
 export const getTopRatedPrograms = async (params = {}) => {
@@ -100,7 +112,7 @@ export const useAddProgram = () =>
   });
 
 export const getSavedPrograms = async () => {
-  const { data } = await axiosInstance.get("/my-list"); 
+  const { data } = await axiosInstance.get("/movie-list"); 
   return data;
 };
 

@@ -9,12 +9,9 @@ const NewAndPopular = () => {
 
   return (
     <div className="max-w-screen min-h-screen bg-[#141414] text-white overflow-x-hidden relative">
-      {/* Navbar Always On Top */}
       <div className="fixed top-0 left-0 w-full z-50">
         <Navbar />
       </div>
-
-      {/* Page Title */}
       <div className="pt-24 px-6 sm:px-10 lg:px-20">
         <h1
           className="text-4xl font-extrabold tracking-wide uppercase mb-8"
@@ -22,15 +19,9 @@ const NewAndPopular = () => {
         >
           New & Popular
         </h1>
-
-        {/* New Movies */}
         <NewFilm setSelectedMovie={setSelectedMovie} type="movie" />
-
-        {/* New TV Shows */}
         <NewFilm setSelectedMovie={setSelectedMovie} type="tv" />
       </div>
-
-      {/* Modal */}
       {selectedMovie && (
         <MovieDialog
           movie={selectedMovie}
@@ -38,7 +29,6 @@ const NewAndPopular = () => {
           onClose={() => setSelectedMovie(null)}
         />
       )}
-
       <HomeFooter />
     </div>
   );

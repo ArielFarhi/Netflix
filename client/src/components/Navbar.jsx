@@ -12,7 +12,7 @@ import { useUserAuth } from "../context/Authentication.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // ← חדש
+  const location = useLocation();
   const { user, signOutUser } = useUserAuth();
   const [searchInput, setSearchInput] = useState("");
   const { updateSearchQuery } = useSearchContext();
@@ -24,10 +24,6 @@ const Navbar = () => {
 
   const handleSearch = () => {
     console.log("Search triggered:", searchInput);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleSearch();
   };
 
   const handleLogout = () => {
@@ -67,22 +63,11 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
         <div className="flex items-center gap-6">
-          <div className="relative border border-gray-600 rounded-md w-60 h-10 flex items-center px-3 hover:border-gray-500 transition-colors duration-200">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="bg-transparent w-full h-full text-white placeholder-gray-400 outline-none pr-8"
-            />
-            <i
-              className="fa-solid fa-magnifying-glass text-white absolute right-3 cursor-pointer"
-              onClick={handleSearch}
-            ></i>
-          </div>
+          <i
+            className="fa-solid fa-magnifying-glass text-white text-xl cursor-pointer"
+            onClick={handleSearch}
+          ></i>
           <i className="fa-regular fa-bell text-xl text-white cursor-pointer"></i>
           <MenuRoot>
             <MenuTrigger className="flex items-center gap-2 focus:outline-none">

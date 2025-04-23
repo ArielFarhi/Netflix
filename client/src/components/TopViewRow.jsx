@@ -15,18 +15,42 @@ const TopViewsRow = ({ setSelectedMovie, type }) => {
 
   return (
     <section className="mt-8 w-full">
-      <h3 className="text-[20px] font-medium mb-3 relative z-10">Most Viewed</h3>
+      <h3 className="text-[20px] font-medium mb-3 relative z-10">
+        Top 10 movies in the U.S. Today
+      </h3>
       <div className="relative flex items-center w-full">
-        <div className="flex flex-row gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-          {mostViewed?.map((movie) => (
-            <img
-              key={uuid()}
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-              className="min-w-[218px] h-[123px] object-cover rounded cursor-pointer transition-transform hover:scale-105"
-              onClick={() => setSelectedMovie(movie.id)}
-            />
-          ))}
+        <div className="flex flex-row gap-20 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide pl-[50px]">
+          {mostViewed?.map((movie, index) => {
+            const number = index + 1;
+            const isDoubleDigit = number >= 10;
+            return (
+              <div
+                key={uuid()}
+                className="relative min-w-[90px] h-[123px] flex items-center justify-center"
+                style={{ flexShrink: 0 }}
+              >
+                <span
+                  className="absolute text-[120px] font-extrabold leading-none z-0 pointer-events-none"
+                  style={{
+                    left: isDoubleDigit ? "-100px" : "-60px",
+                    top: "0",
+                    color: "transparent",
+                    fontFamily: "Arial, sans-serif",
+                    WebkitTextStroke: "2px #9ca3af",
+                  }}
+                >
+                  {number}
+                </span>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className={`w-[140px] h-[210px] object-cover rounded cursor-pointer z-10 transition-transform hover:scale-105 ${isDoubleDigit ? "ml-4" : "ml-1"
+                    }`}
+                  onClick={() => setSelectedMovie(movie.id)}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
