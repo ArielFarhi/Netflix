@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { useSearchContext } from "../context/Search.jsx";
 import {
   MenuRoot,
@@ -12,6 +12,7 @@ import { useUserAuth } from "../context/Authentication.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // ← חדש
   const { user, signOutUser } = useUserAuth();
   const [searchInput, setSearchInput] = useState("");
   const { updateSearchQuery } = useSearchContext();
@@ -58,7 +59,9 @@ const Navbar = () => {
             <Link
               key={index}
               to={path}
-              className="text-white hover:text-gray-300"
+              className={`text-white hover:text-gray-300 ${
+                location.pathname === path ? "underline" : ""
+              }`}
             >
               {label}
             </Link>
