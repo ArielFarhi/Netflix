@@ -151,6 +151,7 @@ import Logs from "./pages/admin/Logs.jsx";
 import DataManagement from "./pages/admin/DataManagement.jsx";
 import NewAndPopular from "./pages/NewAndPopular.jsx"; 
 import Review from "./pages/Review.jsx";
+import Movie from "./pages/Movies.jsx";
 
 const router = createBrowserRouter([
   {
@@ -189,7 +190,7 @@ const router = createBrowserRouter([
     path: "/movies",
     element: (
       <ProtectedRoute>
-        <MovieDialog />
+        <Movie />
       </ProtectedRoute>
     ),
   },
