@@ -32,7 +32,7 @@ const styleMap = cva(
   }
 );
 
-const ActionButton = forwardRef(
+const Button = forwardRef(
   ({ asChild = false, className, theme, dimension, ...attrs }, ref) => {
     const Tag = asChild ? Slot : "button";
     return (
@@ -45,6 +45,6 @@ const ActionButton = forwardRef(
   }
 );
 
-ActionButton.displayName = "ActionButton";
+Button.displayName = "Button";
 
-export { ActionButton, styleMap };
+export { Button, styleMap };

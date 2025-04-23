@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Card, CardContent } from "../components/ui/Card";
-import { ActionButton } from "../components/ui/Button";
+import { Button } from "../components/ui/Button";
 import { Dialog, DialogContent, DialogTrigger } from "../components/ui/Dialog";
 import { TextField } from "../components/ui/TextField";
 import AddIcon from '@mui/icons-material/Add';
@@ -82,13 +82,13 @@ const ProfileSelection = () => {
                   value={newUsername}
                   onChange={(e) => setNewUsername(e.target.value)}
                 />
-                <ActionButton
+                <Button
                   onClick={handleAddProfile}
                   className="w-full"
                   disabled={isPending || !newUsername.trim()}
                 >
                   {isPending ? "Creating..." : "Create Profile"}
-                </ActionButton>
+                </Button>
               </div>
             </DialogContent>
           </Dialog>

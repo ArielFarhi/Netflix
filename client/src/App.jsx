@@ -150,6 +150,7 @@ import AdminLayout from "./layout/adminLayout.jsx";
 import Logs from "./pages/admin/Logs.jsx";
 import DataManagement from "./pages/admin/DataManagement.jsx";
 import NewAndPopular from "./pages/NewAndPopular.jsx"; 
+import Review from "./pages/Review.jsx";
 
 const router = createBrowserRouter([
   {
@@ -205,6 +206,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <MovieList />
+      </ProtectedRoute>
+    ),
+  },
+  { 
+    path: "/review/:movieId",
+    element: (
+      <ProtectedRoute>
+        <Review />
       </ProtectedRoute>
     ),
   },

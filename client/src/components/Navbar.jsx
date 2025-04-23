@@ -86,7 +86,7 @@ const Navbar = () => {
               <img
                 src={`http://localhost:8080/images/${selectedProfile?.avatar || "default.png"}`}
                 alt="Profile"
-                className="h-8 w-8 rounded-full object-cover"
+                className="h-8 w-8 object-cover"
               />
               <i className="fa-solid fa-angle-down text-white"></i>
             </MenuTrigger>
