@@ -25,6 +25,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 const corsOptions = {
   origin: ["http://localhost:3000", "https://netflix-jj9n.onrender.com"],
+  origin: true,
   credentials: true,
 };
 
