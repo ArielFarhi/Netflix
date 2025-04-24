@@ -22,6 +22,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use("/", express.static(path.join(__dirname, "../public")));
+app.use("/images", express.static(path.join(__dirname, "../images")));
+
 
 const corsOptions = {
   origin: ["http://localhost:3000", "https://netflix-zguc.onrender.com"],
