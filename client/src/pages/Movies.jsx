@@ -64,7 +64,6 @@ function Movie() {
           </button>
         </div>
       </div>
-
       <div className="relative z-10 px-3 sm:px-10 lg:px-20 space-y-12 pt-5">
         <RecommendedFilm setSelectedMovie={setSelectedMovie} type="movie" />
         <NewFilm setSelectedMovie={setSelectedMovie} type="movie" />
@@ -74,7 +73,6 @@ function Movie() {
         <AnimatedRow setSelectedMovie={setSelectedMovie} type="movie" />
         <MyList setSelectedMovie={setSelectedMovie} type="movie" />
       </div>
-
       {selectedMovie && (
         <MoviePage
           movie={selectedMovie}
