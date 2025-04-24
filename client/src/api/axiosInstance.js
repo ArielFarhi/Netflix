@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
+const BASE_URL = process.env.REACT_APP_API_URL || "https://netflix-szyh.onrender.com/api";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,

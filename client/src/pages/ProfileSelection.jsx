@@ -116,7 +116,7 @@ const ProfileCard = ({ username, avatar }) => {
     >
       <CardContent className="flex flex-col items-center justify-center p-4 bg-transparent">
         <img
-          src={`http://localhost:8080/images/${avatar || "avatar1.png"}`}
+          src={`https://netflix-szyh.onrender.com/images/${avatar || "avatar1.png"}`}
           alt="Profile"
           className="w-32 h-32 object-cover rounded-md mb-2 border-0 outline-none"
         />

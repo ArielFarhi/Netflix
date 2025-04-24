@@ -29,7 +29,7 @@ const AddProgramForm = ({ onSuccess, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/programs", formData, {
+      await axios.post("https://netflix-szyh.onrender.com/api/programs", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       onSuccess?.();
