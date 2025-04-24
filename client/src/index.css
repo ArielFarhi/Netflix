@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import '@shadcn/ui/styles'; */
 
 @layer base {
   :root {
@@ -84,24 +83,24 @@
   }
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
-    width: 6px; /* Adjust width for a small scrollbar */
+    width: 6px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: #2d2d2d; /* Dark gray track */
+    background: #2d2d2d;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: #888; /* Lighter gray scrollbar handle */
+    background: #888;
     border-radius: 6px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Darker gray on hover */
+    background: #555;
   }
-  
+
 
 
 
