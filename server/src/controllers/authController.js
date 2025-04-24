@@ -1,12 +1,5 @@
 import authService from "../services/authService.js";
 
-const buildCookieOptions = (rememberMe) => ({
-  httpOnly: true,
-  secure: true,
-  sameSite: "None",
-  ...(rememberMe && { maxAge: 60 * 60 * 1000 })
-});
-
 const register = async (req, res, next) => {
   try {
     const { email, phone, password, role } = req.body;
@@ -45,6 +38,5 @@ const getMe = (req, res) => {
 
 export {
   register,
-  login,
   getMe
 };
