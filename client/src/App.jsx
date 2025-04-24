@@ -140,16 +140,15 @@ import DiscoverContent from "./pages/DiscoverContent.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { UserAuthProvider } from "./context/Authentication.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router"; // ✅ פה התיקון
+import { RouterProvider, createBrowserRouter } from "react-router";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import ProfileSelection from "./pages/ProfileSelection.jsx";
 import MovieList from "./pages/MovieList.jsx";
-import MovieDialog from "./pages/MovieDialog.jsx";
 import TvPage from "./pages/TvPage.jsx";
 import AdminLayout from "./layout/adminLayout.jsx";
 import Logs from "./pages/admin/Logs.jsx";
 import DataManagement from "./pages/admin/DataManagement.jsx";
-import NewAndPopular from "./pages/NewAndPopular.jsx"; 
+import NewAndPopular from "./pages/NewAndPopular.jsx";
 import Review from "./pages/Review.jsx";
 import Movie from "./pages/Movies.jsx";
 

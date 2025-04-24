@@ -49,7 +49,6 @@ const SignUp = () => {
       >
         <h2 className="text-2xl font-medium">Sign Up</h2>
 
-        {/* Email */}
         <input
           type="email"
           placeholder="Email"
@@ -65,7 +64,6 @@ const SignUp = () => {
           <span className="text-red-500 text-sm">{errors.email.message}</span>
         )}
 
-        {/* Phone */}
         <input
           type="tel"
           placeholder="Phone number"
@@ -81,7 +79,6 @@ const SignUp = () => {
           <span className="text-red-500 text-sm">{errors.phone.message}</span>
         )}
 
-        {/* Password */}
         <input
           type="password"
           placeholder="Password"

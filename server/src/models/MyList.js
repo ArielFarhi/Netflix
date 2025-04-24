@@ -5,12 +5,11 @@ const myListSchema = new mongoose.Schema({
   movieId: { type: Number, required: true },
   title: { type: String, required: true },
   posterPath: { type: String },
-  profileId: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" } // אופציונלי
+  profileId: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" }
 }, {
   timestamps: true
 });
 
-// מניעת כפילויות: משתמש לא יכול להוסיף את אותו סרט פעמיים
 myListSchema.index({ userId: 1, movieId: 1 }, { unique: true });
 
 export default mongoose.model("MyList", myListSchema);

@@ -4,7 +4,7 @@ const buildCookieOptions = (rememberMe) => ({
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: "strict",
-  ...(rememberMe && { maxAge: 60 * 60 * 1000 }) 
+  ...(rememberMe && { maxAge: 60 * 60 * 1000 })
 });
 
 const register = async (req, res, next) => {
@@ -40,8 +40,8 @@ const getMe = (req, res) => {
   });
 };
 
-export { 
-  register, 
-  login, 
-  getMe 
+export {
+  register,
+  login,
+  getMe
 };

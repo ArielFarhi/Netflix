@@ -9,32 +9,32 @@ const AuthContext = createContext();
 
 export const UserAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser)); 
+        setUser(JSON.parse(storedUser));
       } catch (error) {
         console.error("Failed to parse user from localStorage", error);
       }
     }
-    setIsLoading(false); 
+    setIsLoading(false);
   }, []);
 
   const signInUser = (userData) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData)); 
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const signOutUser = () => {
     setUser(null);
-    localStorage.removeItem("user"); 
+    localStorage.removeItem("user");
   };
 
   if (isLoading) {
-    return <LoadingScreen />; 
+    return <LoadingScreen />;
   }
 
   return (

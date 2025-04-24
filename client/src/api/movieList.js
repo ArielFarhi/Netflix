@@ -3,7 +3,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const addMovieToList = async (movieData) => {
-  console.log("📦 movieData being sent:", movieData); //need to delete
   const { data } = await axiosInstance.post("/movie-list", movieData);
   return data;
 };
@@ -17,7 +16,7 @@ export const useMovieList = (userId) => {
   return useQuery({
     queryKey: ["movieList", userId],
     queryFn: () => fetchMovieList(userId),
-    enabled: !!userId, 
+    enabled: !!userId,
   });
 };
 
