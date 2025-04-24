@@ -32,7 +32,7 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
-https://netflix-jj9n.onrender.com
+
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
