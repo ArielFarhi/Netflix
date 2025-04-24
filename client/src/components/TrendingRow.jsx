@@ -4,11 +4,29 @@ import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen";
 
 const TrendingRow = ({ setSelectedMovie, type, title = "Popular on Netflix" }) => {
+  const isAll = type === "all";
+
   const {
-    data: trendingPrograms,
-    isLoading,
-    error,
-  } = usePrograms({ query: "popular", type });
+    data: movies = [],
+    isLoading: loadingMovies,
+    error: errorMovies,
+  } = usePrograms({ query: "popular", type: isAll ? "movie" : type });
+
+  const {
+    data: tvShows = [],
+    isLoading: loadingTV,
+    error: errorTV,
+  } = usePrograms({ query: "popular", type: isAll ? "tv" : null });
+
+  const trendingPrograms = isAll
+    ? [...movies, ...tvShows].map((item) => ({
+        ...item,
+        type: item.type || item.media_type || (item.name ? "tv" : "movie"),
+      }))
+    : movies;
+
+  const isLoading = loadingMovies || (isAll && loadingTV);
+  const error = errorMovies || (isAll && errorTV);
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading trending content.</div>;
@@ -18,13 +36,18 @@ const TrendingRow = ({ setSelectedMovie, type, title = "Popular on Netflix" }) =
       <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
       <div className="relative flex items-center w-full">
         <div className="flex flex-row gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-          {trendingPrograms?.map((movie) => (
+          {trendingPrograms.map((program) => (
             <img
               key={uuid()}
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/w500${program.poster_path}`}
+              alt={program.title || program.name}
               className="min-w-[218px] h-[123px] object-cover rounded cursor-pointer transition-transform hover:scale-105"
-              onClick={() => setSelectedMovie(movie.id)}
+              onClick={() =>
+                setSelectedMovie({
+                  id: program.id,
+                  type: program.type || "movie",
+                })
+              }
             />
           ))}
         </div>
