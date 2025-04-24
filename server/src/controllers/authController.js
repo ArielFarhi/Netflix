@@ -2,8 +2,8 @@ import authService from "../services/authService.js";
 
 const buildCookieOptions = (rememberMe) => ({
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  secure: true,
+  sameSite: "None",
   ...(rememberMe && { maxAge: 60 * 60 * 1000 })
 });
 
@@ -17,19 +17,22 @@ const register = async (req, res, next) => {
   }
 };
 
-const login = async (req, res, next) => {
+
+export const login = async (req, res, next) => {
   try {
-    const { email, password, rememberMe } = req.body;
-    const { user, token } = await authService.loginUser({ email, password });
+    const { user, token } = await authService.loginUser(req.body);
 
-    res.cookie("token", token, buildCookieOptions(rememberMe));
-
-    res.status(200).json({
-      message: "Successfully logged in",
-      user,
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,           
+      sameSite: "None",      
+      maxAge: 24 * 60 * 60 * 1000,
     });
-  } catch (error) {
-    next(error);
+
+    const { password, ...userWithoutPassword } = user.toObject();
+    res.status(200).json({ user: userWithoutPassword });
+  } catch (err) {
+    next(err);
   }
 };
 
