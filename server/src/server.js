@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename);
 app.use("/", express.static(path.join(__dirname, "../public")));
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://netflix-jj9n.onrender.com"],
+  origin: ["http://localhost:3000", "https://netflix-zguc.onrender.com"],
   credentials: true,
 };
 
