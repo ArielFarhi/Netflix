@@ -10,8 +10,10 @@ import TopRating from "../components/TopRating";
 import Animation from "../components/Animation";
 import SavedFilm from "../components/SavedFilm";
 import { usePrograms } from "../api/programData";
+import { useUserAuth } from "../context/Authentication.jsx";
 
 const TvPage = () => {
+    const { user } = useUserAuth();
     const [selectedTvShow, setSelectedTvShow] = useState(null);
 
     const {
@@ -34,8 +36,8 @@ const TvPage = () => {
                 className="relative h-[90vh] w-full bg-cover bg-center flex items-center"
                 style={{
                     backgroundImage: `linear-gradient(to top, rgba(20,20,20,1), rgba(20,20,20,0.2)), url(${randomHeroShow?.backdrop_path
-                            ? `https://image.tmdb.org/t/p/original${randomHeroShow.backdrop_path}`
-                            : `/Hero.png`
+                        ? `https://image.tmdb.org/t/p/original${randomHeroShow.backdrop_path}`
+                        : `/Hero.png`
                         })`,
                 }}
             >
@@ -69,7 +71,11 @@ const TvPage = () => {
                 <MostViewedFilm setSelectedMovie={setSelectedTvShow} type="tv" />
                 <TopRating setSelectedMovie={setSelectedTvShow} type="tv" />
                 <Animation setSelectedMovie={setSelectedTvShow} type="tv" />
-                <SavedFilm setSelectedMovie={setSelectedTvShow} type="tv" />
+                <SavedFilm
+                    setSelectedMovie={setSelectedTvShow}
+                    userId={user?._id}
+                    type="tv"
+                />
             </div>
             {selectedTvShow && (
                 <MovieDialog
