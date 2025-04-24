@@ -72,7 +72,7 @@ const Navbar = () => {
           <MenuRoot>
             <MenuTrigger className="flex items-center gap-2 focus:outline-none">
               <img
-                src={`https://netflix-zguc.onrender.com/images/${selectedProfile?.avatar || "default.png"}`}
+                src={`https://netflix-szyh.onrender.com/images/${selectedProfile?.avatar || "default.png"}`}
                 alt="Profile"
                 className="h-8 w-8 object-cover"
               />
