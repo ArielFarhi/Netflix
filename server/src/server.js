@@ -23,19 +23,17 @@ const __dirname = path.dirname(__filename);
 
 app.use("/", express.static(path.join(__dirname, "../public")));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(logger("dev"));
-
 const corsOptions = {
-  origin: function (origin, callback) {
-    callback(null, true);
-  },
+  origin: ["http://localhost:3000", "https://netflix-jj9n.onrender.com"],
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(logger("dev"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
