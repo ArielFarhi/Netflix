@@ -26,7 +26,12 @@ const MyListRow = ({ setSelectedMovie, userId, title = "My List" }) => {
               src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
               alt={movie.title}
               className="min-w-[218px] h-[123px] object-cover rounded cursor-pointer transition-transform hover:scale-105"
-              onClick={() => setSelectedMovie(movie.movieId)}
+              onClick={() =>
+                setSelectedMovie({
+                  id: movie.movieId,
+                  type: movie.type || "movie",
+                })
+              }
             />
           ))}
         </div>
