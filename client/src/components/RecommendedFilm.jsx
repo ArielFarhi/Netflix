@@ -9,15 +9,12 @@ const RecommendedFilm = ({ setSelectedMovie, type }) => {
     isLoading,
     error,
   } = usePrograms({ query: "popular", type });
-
   if (isLoading) {
     return <LoadingScreen />;
   }
-
   if (error) {
     return <div>Failed to load recommendations.</div>;
   }
-
   return (
     <div className="mt-8 w-full">
       <h3 className="font-medium text-[20px] mb-3 relative z-10">

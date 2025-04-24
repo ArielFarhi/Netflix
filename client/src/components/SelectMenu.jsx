@@ -2,12 +2,10 @@ import React, { useState } from "react";
 
 function SelectMenu({ options, selectedOption, onSelect }) {
   const [open, setOpen] = useState(false);
-
   const handleSelect = (option) => {
     onSelect(option);
     setOpen(false);
   };
-
   return (
     <div className="relative w-40">
       <button
@@ -17,7 +15,6 @@ function SelectMenu({ options, selectedOption, onSelect }) {
       >
         {selectedOption} <span className="ml-2">▼</span>
       </button>
-
       {open && (
         <div className="absolute top-full left-0 w-full mt-1 z-10 bg-black/80 text-white border border-gray-600 rounded shadow-lg max-h-32 overflow-y-auto">
           {options.map((opt, idx) => (

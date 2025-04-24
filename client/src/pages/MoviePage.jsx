@@ -34,7 +34,7 @@ export function MoviePage({ movie: id, isOpen, onClose }) {
 
     const handleAddToList = () => {
         if (!data?.id || !user?._id || !data.title) {
-            console.error("❌ Missing required fields:", { data, user });
+            console.error("Missing required fields:", { data, user });
             return;
         }
 
@@ -58,19 +58,18 @@ export function MoviePage({ movie: id, isOpen, onClose }) {
 
     return (
         <Dialog
-            fullScreen={isFullScreen}
-            open={open}
-            onClose={handleClose}
-            PaperProps={{
-                style: {
-                    width: isFullScreen ? "100vw" : "80vw",
-                    height: isFullScreen ? "100vh" : "70vh",
-                    maxWidth: "100%",
-                    overflowX: "hidden",
-                    margin: isFullScreen ? 0 : "auto",
-                    color: "white",
-                    backgroundColor: "rgba(20, 20, 20, 0.9)",
-                    position: "relative",
+            slotProps={{
+                paper: {
+                    sx: {
+                        width: isFullScreen ? "100vw" : "80vw",
+                        height: isFullScreen ? "100vh" : "70vh",
+                        maxWidth: "100%",
+                        overflowX: "hidden",
+                        margin: isFullScreen ? 0 : "auto",
+                        color: "white",
+                        backgroundColor: "rgba(20, 20, 20, 0.9)",
+                        position: "relative",
+                    },
                 },
             }}
         >

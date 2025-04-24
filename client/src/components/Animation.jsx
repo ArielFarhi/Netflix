@@ -11,7 +11,7 @@ const Animation = ({ setSelectedMovie, type }) => {
   } = useGetAnimatedPrograms({ type });
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingScreen />
   }
 
   if (error) {

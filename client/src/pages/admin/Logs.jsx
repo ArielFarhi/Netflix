@@ -5,7 +5,6 @@ const Logs = () => {
     { id: 1, action: "User login", timestamp: "2025-04-20 10:15" },
     { id: 2, action: "Content updated", timestamp: "2025-04-19 16:42" },
   ];
-
   return (
     <div className="p-6 text-white">
       <h2 className="text-2xl font-semibold mb-4">System Logs</h2>

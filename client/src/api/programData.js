@@ -2,12 +2,6 @@ import axiosInstance from "./axiosInstance";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-// export const getPrograms = async (params = {}) => {
-//   const { data } = await axiosInstance.get("/programs", { params });
-//   return data;
-// };
-
-// Get all programs (with mock genres just for now)
 export const getPrograms = async (params = {}) => {
   const { data } = await axiosInstance.get("/programs", { params });
 

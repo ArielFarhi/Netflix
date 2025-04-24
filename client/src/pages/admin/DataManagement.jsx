@@ -10,14 +10,12 @@ const DataManagement = () => {
       <p className="text-lg mb-4">
         This section is for adding, updating, and deleting programs (movies/series).
       </p>
-
       <button
         onClick={() => setShowForm(!showForm)}
         className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
         {showForm ? "Close Form" : "+ Add New Program"}
       </button>
-
       {showForm && (
         <AddProgramForm
           onSuccess={() => {

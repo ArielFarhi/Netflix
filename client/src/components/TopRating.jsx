@@ -9,17 +9,14 @@ const TopRating = ({ setSelectedMovie, type }) => {
     isLoading,
     error,
   } = useGetTopRatedPrograms({ type });
-
   if (isLoading) {
     return <LoadingScreen />;
   }
-
   if (error) {
     return (
       <div>Error fetching top rated {type === "tv" ? "TV shows" : "movies"}!</div>
     );
   }
-
   return (
     <div className="mt-8 w-full">
       <h3 className="font-medium text-[20px] mb-3 relative z-10">

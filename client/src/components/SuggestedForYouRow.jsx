@@ -5,19 +5,16 @@ import LoadingScreen from "./ui/LoadingScreen";
 
 const SuggestedForYouRow = ({ setSelectedMovie, type, title = "Matched To You" }) => {
   const isAll = type === "all";
-
   const {
     data: movies = [],
     isLoading: loadingMovies,
     error: errorMovies,
   } = usePrograms({ query: "popular", type: isAll ? "movie" : type });
-
   const {
     data: tvShows = [],
     isLoading: loadingTV,
     error: errorTV,
   } = usePrograms({ query: "popular", type: isAll ? "tv" : null });
-
   const recommended = isAll
     ? [...movies, ...tvShows].map((item) => ({
         ...item,
@@ -27,10 +24,8 @@ const SuggestedForYouRow = ({ setSelectedMovie, type, title = "Matched To You" }
 
   const isLoading = loadingMovies || (isAll && loadingTV);
   const error = errorMovies || (isAll && errorTV);
-
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error fetching suggestions.</div>;
-
   return (
     <section className="mt-8 w-full">
       <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>

@@ -10,7 +10,6 @@ const AuthContext = createContext();
 export const UserAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -55,18 +54,15 @@ export const useUserAuth = () => {
 export const useLogin = () => {
   const { signInUser } = useUserAuth();
   const navigate = useNavigate();
-
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (response) => {
       const user = response?.user;
-
       if (user) {
         signInUser(user);
         toast.success("Login Successful", {
           description: `Welcome back, ${user.username}!`,
         });
-
         const isAdmin = user.role === "admin";
         navigate(isAdmin ? "/admin-dashboard" : "/profile-selection");
       } else {
@@ -77,7 +73,6 @@ export const useLogin = () => {
       const message =
         err?.response?.data?.message ||
         "An error occurred. Please try again.";
-
       toast.error("Login Failed", { description: message });
     },
   });
@@ -85,7 +80,6 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   const navigate = useNavigate();
-
   return useMutation({
     mutationFn: registerUser,
     onSuccess: () => {
@@ -98,7 +92,6 @@ export const useRegister = () => {
       const message =
         err?.response?.data?.message ||
         "An error occurred. Please try again.";
-
       toast.error("Registration Failed", { description: message });
     },
   });
@@ -107,7 +100,6 @@ export const useRegister = () => {
 export const useCurrentUser = () => {
   const { signInUser, setUser } = useUserAuth();
   const navigate = useNavigate();
-
   return useQuery({
     queryKey: ["current-user"],
     queryFn: getCurrentUser,

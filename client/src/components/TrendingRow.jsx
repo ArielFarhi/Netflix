@@ -5,32 +5,26 @@ import LoadingScreen from "./ui/LoadingScreen";
 
 const TrendingRow = ({ setSelectedMovie, type, title = "Popular on Netflix" }) => {
   const isAll = type === "all";
-
   const {
     data: movies = [],
     isLoading: loadingMovies,
     error: errorMovies,
   } = usePrograms({ query: "popular", type: isAll ? "movie" : type });
-
   const {
     data: tvShows = [],
     isLoading: loadingTV,
     error: errorTV,
   } = usePrograms({ query: "popular", type: isAll ? "tv" : null });
-
   const trendingPrograms = isAll
     ? [...movies, ...tvShows].map((item) => ({
         ...item,
         type: item.type || item.media_type || (item.name ? "tv" : "movie"),
       }))
     : movies;
-
   const isLoading = loadingMovies || (isAll && loadingTV);
   const error = errorMovies || (isAll && errorTV);
-
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading trending content.</div>;
-
   return (
     <section className="mt-8 w-full">
       <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>

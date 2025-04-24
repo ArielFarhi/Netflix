@@ -16,7 +16,6 @@ import { useUserAuth } from "../context/Authentication.jsx";
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const { user } = useUserAuth();
-
   const { data: movies = [], isLoading: loadingMovies } = usePrograms({
     query: "popular",
     type: "movie",
@@ -55,7 +54,6 @@ function Home() {
           <p className="text-lg font-bold tracking-widest text-[#e50914] mb-1">
             N <span className="text-white">SERIES</span>
           </p>
-
           <div
             className="text-white font-extrabold text-[2.8rem] sm:text-[4rem] leading-[1] tracking-wider"
             style={{ fontFamily: "Anton, sans-serif" }}
@@ -118,7 +116,6 @@ function Home() {
           userId={user?._id}
         />
       </div>
-
       {selectedMovie && (
         <MovieDialog
           movie={selectedMovie.id}
@@ -127,7 +124,6 @@ function Home() {
           onClose={() => setSelectedMovie(null)}
         />
       )}
-
       <HomeFooter />
     </div>
   );

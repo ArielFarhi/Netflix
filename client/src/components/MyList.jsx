@@ -7,9 +7,9 @@ const AddedToMyListPrograms = ({ setSelectedMovie }) => {
   const { user } = useUserAuth();
   const { data: myList, isLoading, error } = useMovieList(user?._id);
 
-  if (isLoading) return <LoadingScreen />;
-  if (error) return <div>Error fetching your list!</div>;
-  if (!myList?.length) return <div className="text-gray-400 mt-6">Your list is empty.</div>;
+  if (isLoading) return <LoadingScreen />
+  if (error) return <div>Error fetching your list!</div>
+  if (!myList?.length) return <div className="text-gray-400 mt-6">Your list is empty.</div>
 
   return (
     <div className="mt-8 w-full">

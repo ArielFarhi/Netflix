@@ -5,32 +5,26 @@ import LoadingScreen from "./ui/LoadingScreen";
 
 const TopViewsRow = ({ setSelectedMovie, type, title = "Top 10 movies in the U.S. Today" }) => {
   const isAll = type === "all";
-
   const {
     data: movies = [],
     isLoading: loadingMovies,
     error: errorMovies,
   } = usePrograms({ query: "most-viewed", type: isAll ? "movie" : type });
-
   const {
     data: tvShows = [],
     isLoading: loadingTV,
     error: errorTV,
   } = usePrograms({ query: "most-viewed", type: isAll ? "tv" : null });
-
   const mostViewed = isAll
     ? [...movies, ...tvShows].map((item) => ({
         ...item,
         type: item.media_type || item.type || (item.name ? "tv" : "movie"),
       }))
     : movies;
-
   const isLoading = loadingMovies || (isAll && loadingTV);
   const error = errorMovies || (isAll && errorTV);
-
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading most viewed content.</div>;
-
   return (
     <section className="mt-8 w-full">
       <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
@@ -39,7 +33,6 @@ const TopViewsRow = ({ setSelectedMovie, type, title = "Top 10 movies in the U.S
           {mostViewed.map((movie, index) => {
             const number = index + 1;
             const isDoubleDigit = number >= 10;
-
             return (
               <div
                 key={uuid()}

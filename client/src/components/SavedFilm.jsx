@@ -9,12 +9,9 @@ const SavedFilm = ({ setSelectedMovie, userId }) => {
     isLoading,
     error,
   } = useMovieList(userId);
-
   if (!userId) return null;
-
   if (isLoading) return <LoadingScreen />;
   if (error) return <div className="text-red-500">Error loading your list.</div>;
-
   if (!myList.length) {
     return (
       <div className="mt-8 w-full text-center text-gray-400">
@@ -22,7 +19,6 @@ const SavedFilm = ({ setSelectedMovie, userId }) => {
       </div>
     );
   }
-
   return (
     <section className="mt-8 w-full">
       <h3 className="text-[20px] font-medium mb-3 relative z-10">Saved for Later</h3>

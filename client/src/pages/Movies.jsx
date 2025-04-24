@@ -80,7 +80,6 @@ function Movie() {
           onClose={() => setSelectedMovie(null)}
         />
       )}
-
       <HomeFooter />
     </div>
   );

@@ -22,15 +22,12 @@ const MovieDialog = ({ movie: id, isOpen, onClose, type = "movie" }) => {
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const { data, isLoading } = useProgramDetail(id, type);
   const { mutate: addToList, isLoading: isAdding } = useAddMovieList();
-
   const handleClose = () => {
     onClose?.();
     setOpen(false);
     setIsFullScreen(false);
   };
-
   const toggleFullScreen = () => setIsFullScreen((prev) => !prev);
-
   const handleAddToList = () => {
     if (!data?.id || !user?._id || !data?.title || !data?.poster_path) return;
     addToList({
@@ -40,9 +37,7 @@ const MovieDialog = ({ movie: id, isOpen, onClose, type = "movie" }) => {
       posterPath: data.poster_path,
     });
   };
-
   if (isLoading || !data) return <LoadingScreen />;
-
   const {
     backdrop_path = "",
     genres = [],
@@ -53,11 +48,9 @@ const MovieDialog = ({ movie: id, isOpen, onClose, type = "movie" }) => {
     country = "Unknown",
     episodes = [],
   } = data;
-
   const genreList = Array.isArray(genres)
     ? genres.map((g) => (typeof g === "string" ? g : g.name)).filter(Boolean)
     : [];
-
   return (
     <Dialog
       fullScreen={isFullScreen}
