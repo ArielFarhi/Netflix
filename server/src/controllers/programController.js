@@ -26,7 +26,7 @@ export const addProgram = async (req, res, next) => {
 export const getProgramDetail = async (req, res, next) => {
   try {
     const programId = req.params.id;
-    const type = req.query.type || "movie";
+    const type = req.query.type || "tv";
     const detail = await programService.getProgramDetail(programId, type);
     res.json(detail);
   } catch (error) {
@@ -37,12 +37,12 @@ export const getProgramDetail = async (req, res, next) => {
 export const searchPrograms = async (req, res, next) => {
   try {
     const searchParams = {
-      type: req.query.type || "movie",
+      type: req.query.type || "tv",
       category: req.query.category,
       language: req.query.language,
       query: req.query.query,
       sortBy: req.query.sortBy,
-      ageRating: req.query.ageRating, 
+      ageRating: req.query.ageRating,
     };
     const results = await programService.searchPrograms(searchParams);
     res.json(results);
@@ -53,7 +53,7 @@ export const searchPrograms = async (req, res, next) => {
 
 export const getTopRatedPrograms = async (req, res, next) => {
   try {
-    const type = req.query.type || "movie";
+    const type = req.query.type || "tv";
     const results = await programService.getTopRatedPrograms(type);
     res.json(results);
   } catch (error) {
@@ -63,7 +63,7 @@ export const getTopRatedPrograms = async (req, res, next) => {
 
 export const getAnimatedPrograms = async (req, res, next) => {
   try {
-    const type = req.query.type || "movie";
+    const type = req.query.type || "tv";
     const results = await programService.getAnimatedPrograms(type);
     res.json(results);
   } catch (error) {
