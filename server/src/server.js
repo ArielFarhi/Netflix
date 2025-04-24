@@ -15,6 +15,7 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 import movieListRoutes from "./routes/movieListRoutes.js";
 
 const app = express();
+app.set("trust proxy", 1);
 const port = process.env.PORT || 8080;
 
 const __filename = fileURLToPath(import.meta.url);
