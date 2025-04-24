@@ -18,7 +18,7 @@ async function addMovieToList(movieData) {
     throw new AppError("Missing required fields", 400);
   }
 
-  const objectUserId = new mongoose.Types.ObjectId(userId); // 🛠 המרה
+  const objectUserId = new mongoose.Types.ObjectId(userId); 
 
   const alreadyExists = await MovieList.findOne({
     userId: objectUserId,

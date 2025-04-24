@@ -7,7 +7,7 @@ const addReview = async (data, userId) => {
     movieId: data.movieId,
     rating: data.rating,
     comment: data.comment,
-    isPublic: data.isPublic, 
+    isPublic: data.isPublic,
     posterPath: data.posterPath,
     title: data.title,
   });

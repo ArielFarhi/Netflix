@@ -6,13 +6,13 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import logger from "morgan";
 import path from "path";
-import { fileURLToPath } from "url"; 
+import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import programRoutes from "./routes/programRoutes.js";
-import reviewRoutes from "./routes/reviewRoutes.js"; 
-import movieListRoutes from "./routes/movieListRoutes.js"; 
+import reviewRoutes from "./routes/reviewRoutes.js";
+import movieListRoutes from "./routes/movieListRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 8080;

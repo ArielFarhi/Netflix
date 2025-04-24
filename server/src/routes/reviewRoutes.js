@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(protect);
 router.post("/", addReview);
-router.get("/", getAllReviews); 
+router.get("/", getAllReviews);
 router.get("/:id", getReviewsByProgram);
 
 export default router;
