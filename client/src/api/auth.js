@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 export const loginUser = async (formData) => {
   const response = await axiosInstance.post(
-    "https://netflix-jj9n.onrender.com/api/auth/login",
+    "https://netflix-zguc.onrender.com/api/auth/login",
     formData,
     {
       withCredentials: true, 

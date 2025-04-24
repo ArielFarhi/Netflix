@@ -24,10 +24,13 @@ const __dirname = path.dirname(__filename);
 app.use("/", express.static(path.join(__dirname, "../public")));
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://netflix-zguc.onrender.com"],
-  origin: true,
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
   credentials: true,
 };
+app.use(cors(corsOptions));
+
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
