@@ -3,7 +3,7 @@ import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen";
 
-const SuggestedForYouRow = ({ setSelectedMovie, type }) => {
+const SuggestedForYouRow = ({ setSelectedMovie, type, title = "Matched To You" }) => {
   const {
     data: recommended,
     isLoading,
@@ -15,9 +15,7 @@ const SuggestedForYouRow = ({ setSelectedMovie, type }) => {
 
   return (
     <section className="mt-8 w-full">
-      <h3 className="text-[20px] font-medium mb-3 relative z-10">
-        Matched To You
-      </h3>
+      <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
       <div className="relative flex items-center w-full">
         <div className="flex flex-row gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
           {recommended?.slice().reverse().map((movie) => (

@@ -24,7 +24,7 @@ const RecentlyReviewedRow = ({ setSelectedMovie }) => {
           {reviewed.map((review) => {
             const posterUrl = review.posterPath
               ? `https://image.tmdb.org/t/p/w500${review.posterPath}`
-              : "/fallback-poster.png"; 
+              : "/fallback-poster.png";
 
             const title = review.title || "Untitled";
 
@@ -34,7 +34,12 @@ const RecentlyReviewedRow = ({ setSelectedMovie }) => {
                 src={posterUrl}
                 alt={title}
                 className="min-w-[218px] h-[123px] object-cover rounded cursor-pointer transition-transform hover:scale-105"
-                onClick={() => setSelectedMovie(review.movieId)}
+                onClick={() =>
+                  setSelectedMovie({
+                    id: review.movieId,
+                    type: review.type || "movie",
+                  })
+                }
               />
             );
           })}

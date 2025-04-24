@@ -3,7 +3,7 @@ import { useMovieList } from "../api/movieList";
 import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen";
 
-const MyListRow = ({ setSelectedMovie, userId }) => {
+const MyListRow = ({ setSelectedMovie, userId, title = "My List" }) => {
   const {
     data: myList = [],
     isLoading,
@@ -17,7 +17,7 @@ const MyListRow = ({ setSelectedMovie, userId }) => {
 
   return (
     <section className="mt-8 w-full">
-      <h3 className="text-[20px] font-medium mb-3 relative z-10">My List</h3>
+      <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
       <div className="relative flex items-center w-full">
         <div className="flex flex-row gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
           {myList?.map((movie) => (

@@ -3,7 +3,7 @@ import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen"; 
 
-const NewReleasesRow = ({ setSelectedMovie, type }) => {
+const NewReleasesRow = ({ setSelectedMovie, type, title = "New on Netflix" }) => {
   const { data: newReleases, isLoading, error } = usePrograms({
     query: "newest",
     type,
@@ -15,7 +15,7 @@ const NewReleasesRow = ({ setSelectedMovie, type }) => {
   return (
     <section className="mt-8 w-full">
       <h3 className="text-[20px] font-medium mb-3 relative z-10">
-        New on Netflix
+        {title}
       </h3>
       <div className="relative flex items-center w-full">
         <div className="flex gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
@@ -25,7 +25,12 @@ const NewReleasesRow = ({ setSelectedMovie, type }) => {
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
               className="min-w-[218px] h-[123px] object-cover rounded cursor-pointer transition-transform hover:scale-105"
-              onClick={() => setSelectedMovie(movie.id)}
+              onClick={() =>
+                setSelectedMovie({
+                  id: movie.id,
+                  type: movie.type || movie.media_type || type || "movie",
+                })
+              }
             />
           ))}
         </div>

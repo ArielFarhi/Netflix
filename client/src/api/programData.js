@@ -7,10 +7,10 @@ import { toast } from "sonner";
 //   return data;
 // };
 
+// Get all programs (with mock genres just for now)
 export const getPrograms = async (params = {}) => {
   const { data } = await axiosInstance.get("/programs", { params });
 
-  // הוספת genres מדומה
   const withGenres = data.map((program, i) => ({
     ...program,
     genres: i % 2 === 0 ? ["Action", "Drama"] : ["Comedy"],
@@ -111,15 +111,16 @@ export const useAddProgram = () =>
       }),
   });
 
-export const getSavedPrograms = async () => {
-  const { data } = await axiosInstance.get("/movie-list"); 
+export const getSavedPrograms = async (userId) => {
+  const { data } = await axiosInstance.get(`/movie-list/${userId}`);
   return data;
 };
 
-export const useSavedPrograms = () =>
+export const useSavedPrograms = (userId) =>
   useQuery({
-    queryKey: ["saved-programs"],
-    queryFn: getSavedPrograms,
+    queryKey: ["saved-programs", userId],
+    queryFn: () => getSavedPrograms(userId),
+    enabled: !!userId,
     onError: (err) =>
       toast.error("Failed to load your saved list", {
         description: err?.response?.data?.message || "Something went wrong!",

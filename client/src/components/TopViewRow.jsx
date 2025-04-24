@@ -3,7 +3,7 @@ import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen";
 
-const TopViewsRow = ({ setSelectedMovie, type }) => {
+const TopViewsRow = ({ setSelectedMovie, type, title = "Top 10 movies in the U.S. Today" }) => {
   const {
     data: mostViewed,
     isLoading,
@@ -15,9 +15,7 @@ const TopViewsRow = ({ setSelectedMovie, type }) => {
 
   return (
     <section className="mt-8 w-full">
-      <h3 className="text-[20px] font-medium mb-3 relative z-10">
-        Top 10 movies in the U.S. Today
-      </h3>
+      <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
       <div className="relative flex items-center w-full">
         <div className="flex flex-row gap-20 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide pl-[50px]">
           {mostViewed?.map((movie, index) => {
@@ -46,7 +44,12 @@ const TopViewsRow = ({ setSelectedMovie, type }) => {
                   alt={movie.title}
                   className={`w-[140px] h-[210px] object-cover rounded cursor-pointer z-10 transition-transform hover:scale-105 ${isDoubleDigit ? "ml-4" : "ml-1"
                     }`}
-                  onClick={() => setSelectedMovie(movie.id)}
+                  onClick={() =>
+                    setSelectedMovie({
+                      id: movie.id,
+                      type: movie.media_type || type || "movie",
+                    })
+                  }
                 />
               </div>
             );

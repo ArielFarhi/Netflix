@@ -3,7 +3,7 @@ import { usePrograms } from "../api/programData";
 import { v4 as uuid } from "uuid";
 import LoadingScreen from "./ui/LoadingScreen";
 
-const TrendingRow = ({ setSelectedMovie, type }) => {
+const TrendingRow = ({ setSelectedMovie, type, title = "Popular on Netflix" }) => {
   const {
     data: trendingPrograms,
     isLoading,
@@ -15,9 +15,7 @@ const TrendingRow = ({ setSelectedMovie, type }) => {
 
   return (
     <section className="mt-8 w-full">
-      <h3 className="text-[20px] font-medium mb-3 relative z-10">
-        Popular on Netflix
-      </h3>
+      <h3 className="text-[20px] font-medium mb-3 relative z-10">{title}</h3>
       <div className="relative flex items-center w-full">
         <div className="flex flex-row gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
           {trendingPrograms?.map((movie) => (
