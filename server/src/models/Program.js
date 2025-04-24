@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const programSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  type: { type: String, enum: ["movie", "tv-show"] },
+  type: { type: String, enum: ["movie", "tv"] },
   description: { type: String }, 
   releaseDate: { type: Date },
   genre: { type: String }, 
