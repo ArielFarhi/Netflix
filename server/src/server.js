@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "hhttps://netflix-szyh.onrender.com/api/"],
+  origin: ["http://localhost:3000", "https://netflix-szyh.onrender.com"],
   credentials: true,
 };
 
