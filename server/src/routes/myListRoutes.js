@@ -7,9 +7,7 @@ const router = express.Router();
 router.use(protect);
 
 router.get("/", getMyList);
-
 router.post("/", addMovie);
-
 router.delete("/:movieId", removeMovie);
 
 export default router;
