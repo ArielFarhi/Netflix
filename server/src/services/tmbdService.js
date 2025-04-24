@@ -11,7 +11,6 @@ async function getProgramInfo(tmdbId, category = "movie") {
   const params = {
     api_key: TMDB_CONFIG.apiKey,
     language: TMDB_CONFIG.language,
-    withCredentials: true,
   };
 
   try {

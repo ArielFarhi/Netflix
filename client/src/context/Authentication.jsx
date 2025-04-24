@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import LoadingScreen from "../components/ui/LoadingScreen";
@@ -10,36 +10,34 @@ const AuthContext = createContext();
 export const UserAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const fetchUser = async () => {
-    try {
-      const user = await getCurrentUser(); // פנייה לשרת עם credentials
-      setUser(user);
-    } catch (err) {
-      setUser(null);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchUser();
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Failed to parse user from localStorage", error);
+      }
+    }
+    setIsLoading(false);
   }, []);
 
   const signInUser = (userData) => {
     setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const signOutUser = () => {
     setUser(null);
-    // אם יש לך גם endpoint של logout בשרת – תשלחי אליו קריאה מפה
-    // await axios.post("/api/auth/logout", {}, { withCredentials: true });
+    localStorage.removeItem("user");
   };
 
-  if (isLoading) return <LoadingScreen />;
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, signInUser, signOutUser }}>
+    <AuthContext.Provider value={{ user, signInUser, signOutUser, setUser }}>
       {children}
     </AuthContext.Provider>
   );
@@ -73,7 +71,8 @@ export const useLogin = () => {
     },
     onError: (err) => {
       const message =
-        err?.response?.data?.message || "An error occurred. Please try again.";
+        err?.response?.data?.message ||
+        "An error occurred. Please try again.";
       toast.error("Login Failed", { description: message });
     },
   });
@@ -91,8 +90,29 @@ export const useRegister = () => {
     },
     onError: (err) => {
       const message =
-        err?.response?.data?.message || "An error occurred. Please try again.";
+        err?.response?.data?.message ||
+        "An error occurred. Please try again.";
       toast.error("Registration Failed", { description: message });
     },
+  });
+};
+
+export const useCurrentUser = () => {
+  const { signInUser, setUser } = useUserAuth();
+  const navigate = useNavigate();
+  return useQuery({
+    queryKey: ["current-user"],
+    queryFn: getCurrentUser,
+    onSuccess: (user) => {
+      if (user) {
+        signInUser(user);
+        navigate("/");
+      }
+    },
+    onError: () => {
+      setUser(null);
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 };

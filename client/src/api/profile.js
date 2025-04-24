@@ -3,9 +3,7 @@ import { toast } from "sonner";
 import axios from "./axiosInstance";
 
 const fetchProfiles = async () => {
-  const response = await axios.get("/profiles", {
-    withCredentials: true,
-  });
+  const response = await axios.get("/profiles");
   return response.data;
 };
 

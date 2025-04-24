@@ -19,7 +19,6 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const tmdbRequest = async (endpoint, params = {}) => {
   try {
     const response = await axios.get(`${TMDB_BASE_URL}${endpoint}`, {
-      withCredentials: true,
       params: {
         api_key: TMDB_API_KEY,
         language: "en-US",

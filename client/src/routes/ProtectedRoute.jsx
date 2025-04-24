@@ -2,10 +2,8 @@ import { Navigate, useLocation } from "react-router";
 import { useUserAuth } from "../context/Authentication.jsx";
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
-  const { user, isLoading } = useUserAuth();
+  const { user } = useUserAuth();
   const location = useLocation();
-
-  if (isLoading) return null; 
 
   if (!user) {
     return <Navigate to="/signin" state={{ from: location }} replace />;

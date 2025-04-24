@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://netflix-jj9n.onrender.com/api";
+const BASE_URL = process.env.REACT_APP_API_URL || "https://netflix-szyh.onrender.com/api";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -12,7 +12,7 @@ const apiClient = axios.create({
 const handleUnauthorized = (error) => {
   if (error.response?.status === 401) {
     localStorage.removeItem("user");
-    // window.location.href = "/signin";
+    window.location.href = "/signin";
   }
   return Promise.reject(error);
 };
