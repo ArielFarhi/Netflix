@@ -16,6 +16,7 @@ const LoadingBlock = ({ className, ...props }) => (
 const ProfileSelection = () => {
   const [newUsername, setNewUsername] = useState("");
   const { data, isLoading, refetch } = useProfiles();
+  console.log("Profiles data:", data);
   const { mutate: createProfile, isPending } = useAddProfile();
 
   const profiles = data?.data?.profiles || [];
