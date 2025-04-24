@@ -28,6 +28,7 @@ app.use(logger("dev"));
 
 const corsOptions = {
   origin: ["http://localhost:3000", "https://netflix-szyh.onrender.com"],
+  origin: true,
   credentials: true,
 };
 
